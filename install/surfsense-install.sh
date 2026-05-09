@@ -30,17 +30,9 @@ update_os
 
 msg_info "Installing Dependencies"
 
-$STD apt-get install -y \
-
-  curl \
-
-  ca-certificates \
-
-  gnupg
+$STD apt-get install -y curl ca-certificates gnupg
 
 msg_ok "Installed Dependencies"
-
-
 
 msg_info "Installing Docker CE"
 
