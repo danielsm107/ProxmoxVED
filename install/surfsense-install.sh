@@ -1,4 +1,3 @@
-
 #!/usr/bin/env bash
 
 
@@ -11,7 +10,7 @@
 
 # Source: https://github.com/MODSetter/SurfSense
 
-
+# shellcheck source=/dev/null
 
 source /dev/stdin <<< "$FUNCTIONS_FILE_PATH"
 
@@ -51,9 +50,7 @@ curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /etc/
 
 chmod a+r /etc/apt/keyrings/docker.gpg
 
-echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian bookworm stable" \
-
-  >/etc/apt/sources.list.d/docker.list
+echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian bookworm stable" >/etc/apt/sources.list.d/docker.list
 
 $STD apt-get update
 
@@ -83,20 +80,7 @@ msg_ok "Pulled SurfSense image"
 
 msg_info "Starting SurfSense"
 
-$STD docker run -d \
-
-  --name surfsense \
-
-  --restart unless-stopped \
-
-  -p 3000:3000 \
-
-  -p 8000:8000 \
-
-  -v surfsense-data:/data \
-
-  ghcr.io/modsetter/surfsense:latest
-
+$STD docker run -d --name surfsense --restart unless-stopped -p 3000:3000 -p 8000:8000 -v surfsense-data:/data ghcr.io/modsetter/surfsense:latest
 echo "latest" >/opt/surfsense_version.txt
 
 msg_ok "Started SurfSense"

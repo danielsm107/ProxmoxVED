@@ -1,7 +1,4 @@
-
 #!/usr/bin/env bash
-
-source <(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/misc/build.func)
 
 # Copyright (c) 2021-2026 community-scripts ORG
 
@@ -10,6 +7,12 @@ source <(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxV
 # License: MIT | https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
 
 # Source: https://github.com/MODSetter/SurfSense
+
+
+
+# shellcheck source=/dev/null
+
+source <(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/misc/build.func)
 
 
 
@@ -68,21 +71,8 @@ function update_script() {
   $STD docker stop surfsense
 
   $STD docker rm surfsense
-
-  $STD docker run -d \
-
-    --name surfsense \
-
-    --restart unless-stopped \
-
-    -p 3000:3000 \
-
-    -p 8000:8000 \
-
-    -v surfsense-data:/data \
-
-    ghcr.io/modsetter/surfsense:latest
-
+  # shellcheck disable=SC2215
+  $STD docker run -d --name surfsense --restart unless-stopped -p 3000:3000 -p 8000:8000 -v surfsense-data:/data ghcr.io/modsetter/surfsense:latest
   echo "latest" >/opt/surfsense_version.txt
 
   msg_ok "Updated ${APP}"
