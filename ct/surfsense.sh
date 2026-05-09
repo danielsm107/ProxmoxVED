@@ -14,7 +14,7 @@
 
 source <(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/misc/build.func)
 
-
+INSTALL_SCRIPT="https://raw.githubusercontent.com/danielsm107/ProxmoxVED/feat/surfsense/install/surfsense-install.sh"
 
 APP="SurfSense"
 
